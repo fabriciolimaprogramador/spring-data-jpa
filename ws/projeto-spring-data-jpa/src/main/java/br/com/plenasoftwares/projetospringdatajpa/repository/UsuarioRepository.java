@@ -7,5 +7,5 @@ import br.com.plenasoftwares.projetospringdatajpa.model.Usuario;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
-
+	
 }
