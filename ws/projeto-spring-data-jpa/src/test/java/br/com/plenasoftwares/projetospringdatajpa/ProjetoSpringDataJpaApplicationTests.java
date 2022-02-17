@@ -22,45 +22,97 @@ class ProjetoSpringDataJpaApplicationTests {
 //	}
 
 	@Test
-	void testeInsert() {
+	void teste01() {
 		System.out.println("Teste insert");
-		Usuario fabricio = new Usuario();
-		fabricio.setNome("Fabricio");
-		fabricio.setIdade(48);
-		fabricio.setEmail("fabricio@gmail.com");
-		fabricio.setLogin("fabricio");
-		fabricio.setSenha("123");
-		usuarioRepository.save(fabricio);
+		Usuario arthur = new Usuario();
+		arthur.setNome("Arthur");
+		arthur.setIdade(12);
+		arthur.setEmail("arthru@gmail.com");
+		arthur.setLogin("arthur");
+		arthur.setSenha("123");
+		usuarioRepository.save(arthur);
 
-		Usuario celma = new Usuario();
-		celma.setNome("Celma");
-		celma.setIdade(45);
-		celma.setEmail("celma@gmail.com");
-		celma.setLogin("celma");
-		celma.setSenha("456");
-		usuarioRepository.save(celma);
+		Usuario laura = new Usuario();
+		laura.setNome("Laura");
+		laura.setIdade(8);
+		laura.setEmail("laura@gmail.com");
+		laura.setLogin("laura");
+		laura.setSenha("456");
+		usuarioRepository.save(laura);
+
+		Usuario laura2 = new Usuario();
+		laura2.setNome("Laura");
+		laura2.setIdade(8);
+		laura2.setEmail("laura@gmail.com");
+		laura2.setLogin("laura");
+		laura2.setSenha("456");
+		usuarioRepository.save(laura2);
 
 		System.out.println("Usuario inserido");
 
 	}
 
 	@Test
-	void testeBuscarPorId() {
+	void teste02() {
 		System.out.println("Teste buscar por id");
 		Optional<Usuario> usuarioOptional = usuarioRepository.findById(2L);
 		Usuario usuario = usuarioOptional.get();
-		System.out.println(usuario.getNome());
+		System.out.println(usuario.toString());
 	}
 
 	@Test
-	void testeListarTudo() {
+	void teste03() {
 		System.out.println("Teste Listar tudo");
 
 		List<Usuario> usuarios = usuarioRepository.findAll();
 		for (Usuario u : usuarios) {
-			System.out.println("Nome do usuario: " + u.getNome());
+			System.out.println(u.toString());
 		}
 
 	}
+	
+	@Test
+	void teste04() {
+		System.out.println("Teste alterar");
+		Optional<Usuario> usuarioOptional = usuarioRepository.findById(2L);
+		Usuario usuario = usuarioOptional.get();
+		System.out.println("Usuario atual " + usuario.toString());
+		usuario.setNome("Celma Cristina");
+		Usuario usuarioAlerado = usuarioRepository.save(usuario);
+		System.out.println("Usuario alterado para " + usuarioAlerado.toString());
 
+	}
+	
+	
+	@Test
+	void teste05() {
+		System.out.println("Teste buscar por nome");
+		List<Usuario> usuarios = usuarioRepository.buscarPorNome("L");
+		for (Usuario usuario : usuarios) {
+			System.out.println(usuario.toString());
+		}
+		
+	}
+	
+	@Test
+	void teste06() {
+		System.out.println("Teste buscar por nome param");
+		Usuario usuario = usuarioRepository.buscarPorNomeParam("Celma Cristina");
+		System.out.println(usuario.toString());
+		
+	}
+	
+	@Test
+	void teste07() {
+		System.out.println("Teste delete por nome");
+		usuarioRepository.deletePorNome("Laura");
+		System.out.println("Laura deletada");
+		
+		List<Usuario> usuarios = usuarioRepository.findAll();
+		for (Usuario u : usuarios) {
+			System.out.println(u.toString());
+		}
+		
+	}
+	
 }
